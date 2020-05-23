@@ -1,32 +1,31 @@
-# Prerequisites
-*.d
+# CMakeStuff
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# binaries
+main
 
-# Precompiled Headers
-*.gch
-*.pch
+# CLion conf
+cliontest.cbp
+.idea
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# VSCode conf
+.vscode
 
-# Fortran module files
-*.mod
-*.smod
+# Coverage stuff
+.cov.info
+.coverage
+/build/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# Ninja build
+build.ninja
+rules.ninja
+.ninja_deps
+.ninja_log
