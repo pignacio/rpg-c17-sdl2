@@ -19,7 +19,28 @@ find_package(SDL2_ttf REQUIRED)
 find_package(GTEST REQUIRED gtest>=-1.7.0)
 find_package(GMOCK REQUIRED gmock>=1.7.0)
 
-set(COMMON_SOURCES src/logging.h src/logging.cpp)
+set(COMMON_SOURCES
+    src/enum_array.h
+    src/event/mouse.cpp
+    src/event/mouse.h
+    src/logging.cpp
+    src/logging.h
+    src/sdl/event.cpp
+    src/sdl/event.h
+    src/sdl/keyboard_state.cpp
+    src/sdl/keyboard_state.h
+    src/sdl/loader.cpp
+    src/sdl/loader.h
+    src/sdl/ptr.h
+    src/sdl/renderer.cpp
+    src/sdl/renderer.h
+    src/sdl/surface.cpp
+    src/sdl/surface.h
+    src/sdl/texture.cpp
+    src/sdl/texture.h
+    src/sdl/window.cpp
+    src/sdl/window.h
+    )
 set(MAIN_SOURCES src/main.cpp)
 
 add_executable(main ${MAIN_SOURCES} ${COMMON_SOURCES})

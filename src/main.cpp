@@ -1,11 +1,27 @@
-#include <cereal/archives/binary.hpp>
-#include <cereal/archives/json.hpp>
-#include <cereal/cereal.hpp>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <vector>
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <cereal/archives/binary.hpp>
+#include <cereal/archives/json.hpp>
+#include <cereal/cereal.hpp>
+
 #include "logging.h"
+#include "sdl/event.h"
+#include "sdl/loader.h"
+#include "sdl/renderer.h"
+#include "sdl/window.h"
+
+using std::chrono::duration_cast;
+using std::chrono::milliseconds;
+using std::chrono::nanoseconds;
+using std::chrono::steady_clock;
+
+constexpr auto SCREEN_WIDTH = 800;
+constexpr auto SCREEN_HEIGHT = 600;
 
 class Test {
 public:
@@ -36,22 +52,28 @@ auto main() -> int {
   std::set_terminate(logging::terminate);
 
   LOG_INFO(LOG, "Hai!");
-  Test test{101, 203};
-  {
-    std::ofstream out{"/tmp/test2.bin"};
-    cereal::BinaryOutputArchive ar{out};
-    ar(CEREAL_NVP(test));
+
+  auto loader = sdl::SdlLoader::init(SDL_INIT_VIDEO, IMG_INIT_PNG);
+  auto window = sdl::Window::create("My SDL App", SCREEN_WIDTH, SCREEN_HEIGHT,
+                                    SDL_WINDOW_SHOWN);
+  auto renderer = sdl::Renderer::init(*window, SDL_RENDERER_SOFTWARE);
+
+  // Get window surface
+  auto screen = renderer->getWindow().getScreen();
+
+  bool quit = false;
+  sdl::EventQueue queue;
+  while (!quit) {
+    while (auto event = queue.poll()) {
+      LOG_INFO(LOG, "Event");
+      if (event->isQuit() || event->isKeyDown(SDL_SCANCODE_ESCAPE) ||
+          event->isKeyDown(SDL_SCANCODE_Q)) {
+        quit = true;
+      }
+    }
+    LOG_INFO(LOG, "Frame");
+    SDL_Delay(16);
   }
-
-  std::ifstream instream{"/tmp/test2.bin"};
-  cereal::BinaryInputArchive inar{instream};
-
-  Test otest{1, 2};
-  otest.lala();
-
-  inar(CEREAL_NVP(otest));
-  otest.lala();
-
   LOG_INFO(LOG, "Kthxbye!");
   return 0;
 }
