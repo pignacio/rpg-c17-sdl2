@@ -12,11 +12,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_definitions(-DCATCH_CONFIG_PREFIX_ALL)
 
-# find_package(SDL1 REQUIRED) find_package(SDL2_image REQUIRED)
-# find_package(SDL2_ttf REQUIRED)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
-# find_package(GTEST REQUIRED gtest>=-1.7.0) find_package(GMOCK REQUIRED
-# gmock>=1.7.0)
+find_package(GTEST REQUIRED gtest>=-1.7.0)
+find_package(GMOCK REQUIRED gmock>=1.7.0)
 
 add_executable(main src/main.cpp)
 
