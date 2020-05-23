@@ -19,7 +19,10 @@ find_package(SDL2_ttf REQUIRED)
 find_package(GTEST REQUIRED gtest>=-1.7.0)
 find_package(GMOCK REQUIRED gmock>=1.7.0)
 
-add_executable(main src/main.cpp)
+set(COMMON_SOURCES src/logging.h src/logging.cpp)
+set(MAIN_SOURCES src/main.cpp)
+
+add_executable(main ${MAIN_SOURCES} ${COMMON_SOURCES})
 
 include_directories(
   src
@@ -29,5 +32,7 @@ include_directories(
   ${SDL2_TTF_INCLUDE_DIR}
   ${GTEST_INCLUDE_DIRS}
   ${GMOCK_INCLUDE_DIRS})
-
 include_directories(SYSTEM src/thirdparty)
+
+target_link_libraries(main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}
+                      ${SDL2_TTF_LIBRARIES})
