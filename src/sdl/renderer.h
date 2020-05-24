@@ -6,8 +6,8 @@
 #define CLIONTEST_RENDERER_H
 
 #include <memory>
+#include <optional>
 #include <string>
-#include<optional>
 
 #include <SDL2/SDL_render.h>
 

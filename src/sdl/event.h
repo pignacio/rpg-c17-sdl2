@@ -32,7 +32,7 @@ private:
 
 class EventQueue {
 public:
-   std::optional<Event> poll() const;
+  std::optional<Event> poll() const;
 };
 
 } // namespace sdl

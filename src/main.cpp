@@ -25,10 +25,10 @@ constexpr auto SCREEN_HEIGHT = 600;
 
 class Test {
 public:
-  explicit Test(int x, int y) : _x{x}, _y{y} {}
+  explicit Test(int x, int y) : _x{x}, _y{y} {
+  }
 
-  template <class Archive>
-  void serialize(Archive &ar, [[gnu::unused]] uint32_t version) {
+  template <class Archive> void serialize(Archive &ar, [[gnu::unused]] uint32_t version) {
     std::cout << "serialize:Version: " << version << std::endl;
     ar(CEREAL_NVP(_x));
     if (version > 1) {
@@ -54,8 +54,7 @@ auto main() -> int {
   LOG_INFO(LOG, "Hai!");
 
   auto loader = sdl::SdlLoader::init(SDL_INIT_VIDEO, IMG_INIT_PNG);
-  auto window = sdl::Window::create("My SDL App", SCREEN_WIDTH, SCREEN_HEIGHT,
-                                    SDL_WINDOW_SHOWN);
+  auto window = sdl::Window::create("My SDL App", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
   auto renderer = sdl::Renderer::init(*window, SDL_RENDERER_SOFTWARE);
 
   // Get window surface
