@@ -10,6 +10,7 @@
 #include <cereal/cereal.hpp>
 
 #include "data/map.h"
+#include "gfx/sprite_sheet.h"
 #include "logging.h"
 #include "sdl/event.h"
 #include "sdl/loader.h"
@@ -72,6 +73,11 @@ auto getInitialMap() -> Map {
   return {1, 1};
 }
 
+auto loadTexture(const std::string &path, sdl::Renderer *renderer) -> sdl::Texture::ptr {
+  auto surface = sdl::Surface::load(path)->optimizeFor(renderer->getWindow().getScreen());
+  return renderer->createTexture(*surface);
+}
+
 auto run() -> void {
   auto loader = sdl::SdlLoader::init(SDL_INIT_VIDEO, IMG_INIT_PNG);
   auto window = sdl::Window::create("My SDL App", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -79,9 +85,14 @@ auto run() -> void {
 
   // Get window surface
   auto screen = renderer->getWindow().getScreen();
+
+  auto tiles = loadTexture("magecity.png", renderer.get());
+  const int TILESIZE = 32;
+  gfx::SpriteSheetImpl tile_sheet{*tiles, TILESIZE, TILESIZE};
   data::Map map{10, 10};
   map.set(3, 3, 3);
   map.set(6, 6, 6);
+
   bool quit = false;
   sdl::EventQueue queue;
   while (!quit) {
@@ -91,11 +102,13 @@ auto run() -> void {
         quit = true;
       }
     }
+    renderer->clear();
+    map.forEach([&renderer, &tile_sheet](int x, int y, int value) {
+      renderer->copy(tile_sheet.get(value), {TILESIZE * x, TILESIZE * y});
+    });
+    renderer->present();
     SDL_Delay(16);
   }
-
-  map.forEach(
-      [](int x, int y, int value) { LOG_INFO(LOG, "(" << x << "," << y << "):" << value); });
 }
 
 auto main() -> int {

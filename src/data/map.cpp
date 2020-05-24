@@ -12,7 +12,6 @@ auto Map::set(int x, int y, int value) -> void {
 }
 
 auto Map::forEach(std::function<void(int, int, int)> consumer) const -> void {
-  LOG_INFO(LOG, "Map::forEach");
   _layer.forEach(consumer);
 }
 

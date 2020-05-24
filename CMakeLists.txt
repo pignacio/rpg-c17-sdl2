@@ -26,6 +26,8 @@ set(COMMON_SOURCES
     src/enum_array.h
     src/event/mouse.cpp
     src/event/mouse.h
+    src/gfx/sprite_sheet.cpp
+    src/gfx/sprite_sheet.h
     src/logging.cpp
     src/logging.h
     src/sdl/event.cpp

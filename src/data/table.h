@@ -16,7 +16,7 @@ public:
   auto get(int x, int y) const -> T {
     auto index = _index(x, y);
     if (index >= _data.size())
-      return 0;
+      return {};
     return _data[index];
   }
 
@@ -37,10 +37,10 @@ public:
   }
 
   auto forEach(std::function<void(int, int, const T&)> consumer) const -> void {
-    int index = 0;
-    for (auto& value: _data) {
-      consumer(index % _width, index / _width, value);
-      index++;
+    for (int y = 0; y < _height; ++y) {
+      for (int x = 0; x < _width; ++x) {
+        consumer(x, y, get(x, y));
+      }
     }
   }
 
