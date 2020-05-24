@@ -20,6 +20,9 @@ find_package(GTEST REQUIRED gtest>=-1.7.0)
 find_package(GMOCK REQUIRED gmock>=1.7.0)
 
 set(COMMON_SOURCES
+    src/data/map.cpp
+    src/data/map.h
+    src/data/table.h
     src/enum_array.h
     src/event/mouse.cpp
     src/event/mouse.h
@@ -40,7 +43,10 @@ set(COMMON_SOURCES
     src/sdl/texture.h
     src/sdl/window.cpp
     src/sdl/window.h
-    )
+    src/utils/assert.cpp
+    src/utils/assert.h
+)
+
 set(MAIN_SOURCES src/main.cpp)
 
 add_executable(main ${MAIN_SOURCES} ${COMMON_SOURCES})
@@ -52,8 +58,10 @@ include_directories(
   ${SDL2_IMAGE_INCLUDE_DIR}
   ${SDL2_TTF_INCLUDE_DIR}
   ${GTEST_INCLUDE_DIRS}
-  ${GMOCK_INCLUDE_DIRS})
+  ${GMOCK_INCLUDE_DIRS}
+)
 include_directories(SYSTEM thirdparty)
 
-target_link_libraries(main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}
-                      ${SDL2_TTF_LIBRARIES})
+target_link_libraries(
+  main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES}
+)
