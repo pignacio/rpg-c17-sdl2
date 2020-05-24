@@ -59,16 +59,16 @@ Map loadMap(std::istream &stream) {
 }
 
 auto getInitialMap() -> Map {
-/*  if (argc < 2) {
-    filename = "/tmp/mapa.lala";
-    LOG_INFO(LOG, "No filename supplied. Writing to " << filename)
-    return {10, 10};
-  } else {
-    filename = argv[1];
-    LOG_INFO(LOG, "Loading map data from " << filename)
-    auto ifstream = std::ifstream{filename};
-    return loadMap(ifstream);
-  }*/
+  /*  if (argc < 2) {
+      filename = "/tmp/mapa.lala";
+      LOG_INFO(LOG, "No filename supplied. Writing to " << filename)
+      return {10, 10};
+    } else {
+      filename = argv[1];
+      LOG_INFO(LOG, "Loading map data from " << filename)
+      auto ifstream = std::ifstream{filename};
+      return loadMap(ifstream);
+    }*/
   return {1, 1};
 }
 
@@ -79,7 +79,9 @@ auto run() -> void {
 
   // Get window surface
   auto screen = renderer->getWindow().getScreen();
-
+  data::Map map{10, 10};
+  map.set(3, 3, 3);
+  map.set(6, 6, 6);
   bool quit = false;
   sdl::EventQueue queue;
   while (!quit) {
@@ -91,6 +93,9 @@ auto run() -> void {
     }
     SDL_Delay(16);
   }
+
+  map.forEach(
+      [](int x, int y, int value) { LOG_INFO(LOG, "(" << x << "," << y << "):" << value); });
 }
 
 auto main() -> int {

@@ -36,14 +36,22 @@ public:
     return _height;
   }
 
+  auto forEach(std::function<void(int, int, const T&)> consumer) const -> void {
+    int index = 0;
+    for (auto& value: _data) {
+      consumer(index % _width, index / _width, value);
+      index++;
+    }
+  }
+
 private:
   int _width;
   int _height;
   std::vector<T> _data;
 
   inline unsigned long _index(int x, int y) const {
-    checkIndex(x, _width, "x");
-    checkIndex(y, _height, "x");
+    utils::checkIndex(x, _width, "x");
+    utils::checkIndex(y, _height, "x");
     return static_cast<unsigned long>(y * _width + x);
   }
 };

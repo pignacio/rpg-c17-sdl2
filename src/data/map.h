@@ -8,6 +8,11 @@ namespace data {
 class Map {
 public:
   Map(int widht, int height);
+
+  auto set(int x, int y, int value) -> void;
+
+  auto forEach(std::function<void(int, int, int)> consumer) const -> void;
+
 private:
   Table<int> _layer;
 };
