@@ -3,12 +3,14 @@
 
 #include <vector>
 
+#include <cereal/cereal.hpp>
+#include <cereal/types/vector.hpp>
+
 #include "utils/assert.h"
 
 namespace data {
 
-template <typename T>
-class Table {
+template <typename T> class Table {
 public:
   Table(int width, int height) : _width{width}, _height{height}, _data{} {
   }
@@ -36,12 +38,16 @@ public:
     return _height;
   }
 
-  auto forEach(std::function<void(int, int, const T&)> consumer) const -> void {
+  auto forEach(std::function<void(int, int, const T &)> consumer) const -> void {
     for (int y = 0; y < _height; ++y) {
       for (int x = 0; x < _width; ++x) {
         consumer(x, y, get(x, y));
       }
     }
+  }
+
+  template <typename Archive> void serialize(Archive &ar, [[gnu::unused]] uint32_t version) {
+    ar(CEREAL_NVP(_width), CEREAL_NVP(_height), CEREAL_NVP(_data));
   }
 
 private:
@@ -56,6 +62,8 @@ private:
   }
 };
 
-}  // namespace data
+} // namespace data
 
-#endif  // SRC_DATA_TABLE_H
+CEREAL_CLASS_VERSION(data::Table<int>, 1); // NOLINT
+
+#endif // SRC_DATA_TABLE_H

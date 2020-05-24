@@ -109,6 +109,10 @@ auto run() -> void {
     renderer->present();
     SDL_Delay(16);
   }
+
+  std::ofstream out{"/tmp/testing_map.json"};
+  cereal::JSONOutputArchive archive{out};
+  archive(map);
 }
 
 auto main() -> int {
