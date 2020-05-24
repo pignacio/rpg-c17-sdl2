@@ -53,7 +53,7 @@ include_directories(
   ${SDL2_TTF_INCLUDE_DIR}
   ${GTEST_INCLUDE_DIRS}
   ${GMOCK_INCLUDE_DIRS})
-include_directories(SYSTEM src/thirdparty)
+include_directories(SYSTEM thirdparty)
 
 target_link_libraries(main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}
                       ${SDL2_TTF_LIBRARIES})
