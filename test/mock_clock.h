@@ -22,7 +22,7 @@ public:
   static void reset();
 
 private:
-  static long long millis;
+  static int64_t millis;
 };
 
 #endif

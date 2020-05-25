@@ -12,7 +12,7 @@ using sdl::TextureImpl;
 using ::testing::Return;
 
 SCENARIO("Textures works as CopySources", "[sdl][CopySource]") {
-  auto ptr = reinterpret_cast<SDL_Texture *>(0x123456);
+  auto ptr = reinterpret_cast<SDL_Texture *>(0x123456);  // NOLINT
   ::testing::StrictMock<MockTexture> texture;
   EXPECT_CALL(texture, width()).WillRepeatedly(Return(10));
   EXPECT_CALL(texture, height()).WillRepeatedly(Return(20));

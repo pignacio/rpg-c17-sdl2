@@ -5,21 +5,22 @@
 #ifndef CLIONTEST_KEYBOARD_STATE_H
 #define CLIONTEST_KEYBOARD_STATE_H
 
+
 #include <SDL2/SDL.h>
+#include <gsl/span>
 
 class KeyboardState {
 public:
-  virtual ~KeyboardState() = default;
   bool isPressed(SDL_Scancode key) const;
 
   static KeyboardState create();
 
-protected:
-  KeyboardState(const Uint8 *state, int size);
+  friend KeyboardState createStateForTesting(gsl::span<const Uint8> state);
 
 private:
-  const Uint8 *_state;
-  const int _size;
+  explicit KeyboardState(gsl::span<const Uint8> state);
+
+  const gsl::span<const Uint8> _state;
 };
 
 #endif // CLIONTEST_KEYBOARD_STATE_H

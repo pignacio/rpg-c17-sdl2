@@ -9,16 +9,14 @@ SDL_Scancode key(int index) {
   return static_cast<SDL_Scancode>(index);
 }
 
-class MyKeyboardState : public KeyboardState {
-public:
-  MyKeyboardState(Uint8 *state, int size) : KeyboardState(state, size){};
-};
+KeyboardState createStateForTesting(gsl::span<const Uint8> state) {
+  return KeyboardState{state};
+}
 
 SCENARIO("Using a KeyboardState", "[sdl][KeyboardState]") {
   constexpr int size = 5;
-  Uint8 values[size];
-  memset(values, 0, sizeof(Uint8) * size);
-  MyKeyboardState state{values, size};
+  std::array<Uint8, size> values{};
+  auto state = createStateForTesting(values);
 
   GIVEN("An empty state") {
     THEN("All keys resolve to false") {
@@ -43,7 +41,7 @@ SCENARIO("Using a KeyboardState", "[sdl][KeyboardState]") {
   }
 
   GIVEN("A full keyboard state") {
-    memset(values, 1, sizeof(Uint8) * size);
+    memset(values.data(), 1, sizeof(Uint8) * size);
     THEN("Out of bound access return false ") {
       REQUIRE_FALSE(state.isPressed(key(-1)));
       REQUIRE_FALSE(state.isPressed(key(size)));

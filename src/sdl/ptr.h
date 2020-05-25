@@ -6,7 +6,9 @@
 #define CLIONTEST_PTR_H
 
 #include "../logging.h"
+
 #include <functional>
+#include <gsl/pointers>
 
 namespace sdl {
 template <typename T> using internal_ptr = std::unique_ptr<T, std::function<void(T *)>>;
@@ -50,7 +52,7 @@ sdl_unique_ptr<SDL_T, T> make_sdl_ptr(SDL_T *ptr, std::function<void(SDL_T *)> d
 
 template <typename SDL_T, typename T>
 sdl_unique_ptr<SDL_T, T> make_sdl_ptr(SDL_T *ptr, std::function<void(SDL_T *)> deleter,
-                                      T *wrapper) {
+                                      gsl::owner<T *> wrapper) {
   return sdl_unique_ptr<SDL_T, T>{internal_ptr<SDL_T>{ptr, deleter}, std::unique_ptr<T>{wrapper}};
 };
 

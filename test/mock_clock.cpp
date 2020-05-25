@@ -9,7 +9,7 @@
 
 #include <chrono>
 
-long long MockClock::millis = 0;
+int64_t MockClock::millis = 0;
 
 MockClock::time_point MockClock::now() {
   MockClock::duration duration{millis};

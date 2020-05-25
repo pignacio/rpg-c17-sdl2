@@ -5,11 +5,11 @@
 #include "keyboard_state.h"
 #include "../logging.h"
 
-KeyboardState::KeyboardState(const Uint8 *state, int size) : _state{state}, _size{size} {
+KeyboardState::KeyboardState(gsl::span<const Uint8> state) : _state{state} {
 }
 
 bool KeyboardState::isPressed(SDL_Scancode key) const {
-  if (key < 0 || key >= _size) {
+  if (key < 0 || key >= _state.size()) {
     LOG_WARN(LOG, "Invalid key!: " << key);
     return false;
   }
@@ -19,5 +19,5 @@ bool KeyboardState::isPressed(SDL_Scancode key) const {
 KeyboardState KeyboardState::create() {
   int size = 0;
   const Uint8 *state = SDL_GetKeyboardState(&size);
-  return KeyboardState(state, size);
+  return KeyboardState({state, static_cast<size_t>(size)});
 }
