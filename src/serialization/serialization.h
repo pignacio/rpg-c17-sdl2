@@ -11,57 +11,81 @@
 #include <gsl/string_span>
 
 #include "logging.h"
+#include "utils/strings.h"
 
 namespace serialization {
+namespace internal {
 
 constexpr gsl::czstring<> JSON_SUFFIX = ".json";
 constexpr gsl::czstring<> BINARY_SUFFIX = ".bin";
 
-auto endsWith(std::string_view haystack, std::string_view needle) -> bool {
-  return needle.size() <= haystack.size() &&
-         std::equal(haystack.rbegin(), haystack.rbegin() + static_cast<long>(needle.size()),
-                    needle.rbegin(), needle.rend());
-}
 
-template <typename Data, typename Archive> auto read(const std::string &path) -> Data {
-  LOG_INFO(LOG, "Reading " << boost::typeindex::type_id<Data>().pretty_name() << " from " << path
-                           << " using " << boost::typeindex::type_id<Archive>().pretty_name());
+template <typename Data, typename Archive> auto read(std::istream &stream) -> Data {
   auto data = Data::emptyValue();
-  std::ifstream stream{path};
   Archive archive{stream};
   archive(data);
   return data;
 }
 
-template <typename Data> auto readFromFile(const std::string &path) -> Data {
-  if (endsWith(path, JSON_SUFFIX) && std::ifstream{path}.good()) {
-    return read<Data, cereal::JSONInputArchive>(path);
-  } else if (endsWith(path, BINARY_SUFFIX) && std::ifstream{path}.good()) {
-    return read<Data, cereal::PortableBinaryInputArchive>(path);
-  } else if (auto jsonPath = path + JSON_SUFFIX; std::ifstream{jsonPath}.good()) {
-    return read<Data, cereal::JSONInputArchive>(jsonPath);
-  } else if (auto binaryPath = path + BINARY_SUFFIX; std::ifstream{binaryPath}.good()) {
-    return read<Data, cereal::PortableBinaryInputArchive>(binaryPath);
-  }
-  throw "TODO: better error handling";
+template <typename Data, typename Archive> auto readFile(const std::string &path) -> Data {
+  LOG_INFO(LOG, "Reading " << boost::typeindex::type_id<Data>().pretty_name() << " from " << path
+                           << " using " << boost::typeindex::type_id<Archive>().pretty_name());
+  std::ifstream stream{path};
+  return read<Data, Archive>(stream);
 }
 
 template <typename Data, typename Archive>
-auto writeToFile(const Data &data, const std::string &path, const std::string &suffix) -> void {
-  auto finalPath = endsWith(path, suffix) ? path : path + suffix;
-  LOG_INFO(LOG, "Writing " << boost::typeindex::type_id<Data>().pretty_name() << " to " << finalPath
-                           << " using " << boost::typeindex::type_id<Archive>().pretty_name());
-  std::ofstream stream{finalPath};
+auto write(const Data &data, std::ostream& stream) {
   Archive archive{stream};
   archive(data);
 }
 
+template <typename Data, typename Archive>
+auto writeToFile(const Data &data, const std::string &path, const std::string &suffix) -> void {
+  auto finalPath = utils::endsWith(path, suffix) ? path : path + suffix;
+  LOG_INFO(LOG, "Writing " << boost::typeindex::type_id<Data>().pretty_name() << " to " << finalPath
+                           << " using " << boost::typeindex::type_id<Archive>().pretty_name());
+  std::ofstream stream{finalPath};
+  write<Data, Archive>(data, stream);
+}
+
+} // namespace internal
+
+template <typename Data> auto readFromFile(const std::string &path) -> Data {
+  if (utils::endsWith(path, internal::JSON_SUFFIX) && std::ifstream{path}.good()) {
+    return internal::readFile<Data, cereal::JSONInputArchive>(path);
+  } else if (utils::endsWith(path, internal::BINARY_SUFFIX) && std::ifstream{path}.good()) {
+    return internal::readFile<Data, cereal::PortableBinaryInputArchive>(path);
+  } else if (auto jsonPath = path + internal::JSON_SUFFIX; std::ifstream{jsonPath}.good()) {
+    return internal::readFile<Data, cereal::JSONInputArchive>(jsonPath);
+  } else if (auto binaryPath = path + internal::BINARY_SUFFIX; std::ifstream{binaryPath}.good()) {
+    return internal::readFile<Data, cereal::PortableBinaryInputArchive>(binaryPath);
+  }
+  throw "TODO: better error handling";
+}
+
+template <typename Data> auto readJson(std::istream& stream) -> Data {
+  return internal::read<Data, cereal::JSONInputArchive>(stream); 
+}
+
+template <typename Data> auto readBinary(std::istream& stream) -> Data {
+  return internal::read<Data, cereal::PortableBinaryInputArchive>(stream); 
+}
+
 template <typename Data> auto writeBinaryToFile(const Data &data, const std::string &path) -> void {
-  writeToFile<Data, cereal::PortableBinaryOutputArchive>(data, path, BINARY_SUFFIX);
+  internal::writeToFile<Data, cereal::PortableBinaryOutputArchive>(data, path, internal::BINARY_SUFFIX);
 }
 
 template <typename Data> auto writeJsonToFile(const Data &data, const std::string &path) -> void {
-  writeToFile<Data, cereal::JSONOutputArchive>(data, path, JSON_SUFFIX);
+  internal::writeToFile<Data, cereal::JSONOutputArchive>(data, path, internal::JSON_SUFFIX);
+}
+
+template <typename Data> auto writeJson(const Data &data, std::ostream &stream) {
+  internal::write<Data, cereal::JSONOutputArchive>(data, stream);
+}
+
+template <typename Data> auto writeBinary(const Data &data, std::ostream &stream) {
+  internal::write<Data, cereal::PortableBinaryOutputArchive>(data, stream);
 }
 
 } // namespace serialization

@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(Test)
 
+cmake_policy(SET CMP0076 NEW)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set(GCC_COVERAGE_COMPILE_FLAGS
@@ -49,12 +51,26 @@ set(COMMON_SOURCES
     src/sdl/window.h
     src/utils/assert.cpp
     src/utils/assert.h
+    src/utils/strings.cpp
+    src/utils/strings.h
 )
 
-set(MAIN_SOURCES)
+add_library(common ${COMMON_SOURCES})
 
-add_executable(main ${MAIN_SOURCES} ${COMMON_SOURCES})
+set(MAIN_SOURCES)
+set(EDITOR_SOURCES)
+
+add_executable(main ${MAIN_SOURCES})
 target_sources(main PUBLIC src/main.cpp)
+target_link_libraries(
+  main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} common
+)
+
+add_executable(editor ${EDITOR_SOURCES})
+target_sources(editor PUBLIC src/main_editor.cpp)
+target_link_libraries(
+  editor ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} common
+)
 
 include_directories(
   src
@@ -67,9 +83,6 @@ include_directories(
 )
 include_directories(SYSTEM thirdparty)
 
-target_link_libraries(
-  main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES}
-)
 
 add_executable(
   tests
@@ -95,5 +108,5 @@ target_link_libraries(
 
 target_compile_options(tests PUBLIC -O0 -fprofile-arcs -ftest-coverage
                                     -DDISABLE_BACKTRACES)
-target_link_libraries(tests -O0 -fprofile-arcs -ftest-coverage
-                      -DDISABLE_BACKTRACES)
+target_link_libraries(tests -fprofile-arcs -ftest-coverage
+                                    -DDISABLE_BACKTRACES)
