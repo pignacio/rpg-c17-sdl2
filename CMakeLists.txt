@@ -32,6 +32,8 @@ set(COMMON_SOURCES
     src/logging.h
     src/sdl/event.cpp
     src/sdl/event.h
+    src/sdl/helpers.cpp
+    src/sdl/helpers.h
     src/sdl/keyboard_state.cpp
     src/sdl/keyboard_state.h
     src/sdl/loader.cpp
@@ -49,9 +51,10 @@ set(COMMON_SOURCES
     src/utils/assert.h
 )
 
-set(MAIN_SOURCES src/main.cpp)
+set(MAIN_SOURCES)
 
 add_executable(main ${MAIN_SOURCES} ${COMMON_SOURCES})
+target_sources(main PUBLIC src/main.cpp)
 
 include_directories(
   src
@@ -67,3 +70,30 @@ include_directories(SYSTEM thirdparty)
 target_link_libraries(
   main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES}
 )
+
+add_executable(
+  tests
+  ${COMMON_SOURCES}
+  ${MAIN_SOURCES}
+  test/gfx/test_sprite_sheet.cpp
+  test/mock_clock.cpp
+  test/mock_clock.h
+  test/point/test_point.cpp
+  test/prelude.h
+  test/sdl/mock_texture.cpp
+  test/sdl/mock_texture.h
+  test/sdl/test_event.cpp
+  test/sdl/test_keyboard_state.cpp
+  test/sdl/test_renderer.cpp
+  test/test_logging.cpp
+  test/test_mock_clock.cpp
+  test/test_main.cpp)
+
+target_link_libraries(
+  tests ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES}
+  ${GTEST_LIBRARIES} ${GMOCK_LIBRARIES})
+
+target_compile_options(tests PUBLIC -O0 -fprofile-arcs -ftest-coverage
+                                    -DDISABLE_BACKTRACES)
+target_link_libraries(tests -O0 -fprofile-arcs -ftest-coverage
+                      -DDISABLE_BACKTRACES)
