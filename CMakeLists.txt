@@ -5,7 +5,7 @@ project(Test)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set(GCC_COVERAGE_COMPILE_FLAGS
-    "-Werror -Wall -Wextra -Wconversion -Wshadow -fno-omit-frame-pointer -fsanitize=address"
+    "-Werror -Wall -Wextra -Wconversion -Wshadow -fno-omit-frame-pointer -fsanitize=address -fcolor-diagnostics"
 )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

@@ -19,6 +19,10 @@ public:
     ar(CEREAL_NVP(_layer));
   }
 
+  static auto emptyValue() -> Map {
+    return Map{0, 0};
+  }
+
 private:
   Table<int> _layer;
 };
