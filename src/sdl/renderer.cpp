@@ -10,20 +10,21 @@
 
 namespace sdl {
 
-Renderer::Renderer(SDL_Renderer *renderer, Window window) : _renderer(renderer), _window{window} {
+Renderer::Renderer(SDL_Renderer *renderer, const Window &window)
+    : _renderer(renderer), _window{window} {
 }
 
 Renderer::~Renderer() {
   SDL_DestroyRenderer(_renderer);
 }
 
-std::unique_ptr<Renderer> Renderer::init(Window window, Uint32 renderer_flags) {
+std::unique_ptr<Renderer> Renderer::init(const Window &window, Uint32 renderer_flags) {
 
   LOG_INFO(LOG, "Creating SDL renderer for " << window << ". Flags: " << renderer_flags);
   auto renderer = SDL_CreateRenderer(window.get(), -1, renderer_flags);
 
   LOG_ASSERT(LOG, renderer != nullptr, "Could not create renderer!");
-  return std::make_unique<Renderer>(renderer, std::move(window));
+  return std::make_unique<Renderer>(renderer, window);
 }
 
 Window Renderer::getWindow() const {
@@ -38,7 +39,7 @@ Texture::ptr Renderer::createTexture(const Surface &surface) const {
 }
 
 void Renderer::clear() {
-  // TODO: ignoring return value
+  // TODO(irossi): ignoring return value
   SDL_RenderClear(_renderer);
 }
 

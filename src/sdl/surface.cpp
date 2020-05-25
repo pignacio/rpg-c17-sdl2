@@ -19,7 +19,7 @@ SDL_Surface *Surface::get() const {
   return _surface;
 }
 
-Surface::ptr Surface::optimizeFor(Surface surface) {
+Surface::ptr Surface::optimizeFor(const Surface &surface) {
   LOG_INFO(LOG, "Optimizing " << *this << " for " << surface);
   return Surface::wrap(SDL_ConvertSurface(get(), surface.get()->format, 0));
 }
@@ -32,7 +32,7 @@ void Surface::fill(Uint32 color) {
   SDL_FillRect(_surface, nullptr, color);
 }
 
-void Surface::blit(Surface dest) const {
+void Surface::blit(const Surface &dest) const {
   SDL_BlitSurface(get(), nullptr, dest.get(), nullptr);
 }
 

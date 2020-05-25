@@ -28,7 +28,6 @@ using data::Map;
 constexpr auto SCREEN_WIDTH = 800;
 constexpr auto SCREEN_HEIGHT = 600;
 
-
 auto loadTexture(const std::string &path, sdl::Renderer *renderer) -> sdl::Texture::ptr {
   auto surface = sdl::Surface::load(path)->optimizeFor(renderer->getWindow().getScreen());
   return renderer->createTexture(*surface);

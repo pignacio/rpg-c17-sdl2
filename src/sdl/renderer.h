@@ -22,7 +22,7 @@ class CopyDest;
 
 class Renderer {
 public:
-  Renderer(SDL_Renderer *renderer, Window window);
+  Renderer(SDL_Renderer *renderer, const Window &window);
   Renderer(const Renderer &) = delete;
   Renderer &operator=(const Renderer &) = delete;
   virtual ~Renderer();
@@ -35,7 +35,7 @@ public:
 
   Window getWindow() const;
 
-  static std::unique_ptr<Renderer> init(Window window, Uint32 renderer_flags);
+  static std::unique_ptr<Renderer> init(const Window &window, Uint32 renderer_flags);
 
 private:
   SDL_Renderer *_renderer;

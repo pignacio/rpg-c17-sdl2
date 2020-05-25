@@ -38,7 +38,7 @@ class MouseEventListener {
   using PartialListener = std::function<void(const MouseEvent &)>;
 
 public:
-  void listen(Listener listener);
+  void listen(const Listener &listener);
   void listen(PartialListener listener);
   MouseState getMouseState() const;
 

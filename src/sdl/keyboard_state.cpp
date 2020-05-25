@@ -17,7 +17,7 @@ bool KeyboardState::isPressed(SDL_Scancode key) const {
 }
 
 KeyboardState KeyboardState::create() {
-  int size;
+  int size = 0;
   const Uint8 *state = SDL_GetKeyboardState(&size);
   return KeyboardState(state, size);
 }

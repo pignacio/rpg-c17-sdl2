@@ -9,7 +9,7 @@
 
 namespace event {
 
-void MouseEventListener::listen(MouseEventListener::Listener listener) {
+void MouseEventListener::listen(const MouseEventListener::Listener &listener) {
   _listeners.push_back(listener);
 }
 

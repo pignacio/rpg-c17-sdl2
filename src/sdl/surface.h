@@ -26,10 +26,10 @@ public:
 
   SDL_Surface *get() const;
 
-  ptr optimizeFor(Surface surface);
+  ptr optimizeFor(const Surface &surface);
   void fillRect(const SDL_Rect &rect, Uint32 color);
   void fill(Uint32 color);
-  void blit(Surface dest) const;
+  void blit(const Surface &dest) const;
 
   static ptr wrap(SDL_Surface *surface);
   static ptr load(const std::string &path);
