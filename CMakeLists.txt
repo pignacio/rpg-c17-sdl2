@@ -49,6 +49,8 @@ set(COMMON_SOURCES
     src/sdl/texture.h
     src/sdl/window.cpp
     src/sdl/window.h
+    src/serialization/serialization.h
+    src/serialization/result.h
     src/utils/assert.cpp
     src/utils/assert.h
     src/utils/strings.cpp

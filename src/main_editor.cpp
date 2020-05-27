@@ -22,6 +22,8 @@
 #include "sdl/window.h"
 #include "serialization/serialization.h"
 
+using data::Map;
+
 constexpr int SCREEN_WIDTH = 800;
 constexpr int SCREEN_HEIGHT = 600;
 
@@ -58,15 +60,13 @@ void run(int argc, char *argv[]) {
   sdl::EventQueue queue;
   bool quit = false;
   std::string filename;
-  data::Map map{10, 10};
+  Map map{10, 10};
   if (argc < 2) {
     filename = "/tmp/mapa.lala";
     LOG_INFO(LOG, "No filename supplied. Writing to " << filename)
   } else {
     filename = argv[1];
-    LOG_INFO(LOG, "Loading map data from " << filename)
-    auto ifstream = std::ifstream{filename};
-    map = serialization::readJson<data::Map>(ifstream);
+    map = serialization::readFromFile<Map>(filename).orPanic();
   }
 
   int selected_tile = 1;
@@ -123,7 +123,7 @@ void run(int argc, char *argv[]) {
 
     renderer->clear();
     map.forEach([&renderer, &tile_sheet](int x, int y, int value) {
-        renderer->copy(tile_sheet.get(value), {TILESIZE * x, TILESIZE * y});
+      renderer->copy(tile_sheet.get(value), {TILESIZE * x, TILESIZE * y});
     });
     renderer->copy(tile_sheet.get(selected_tile), {SCREEN_WIDTH - 2 * TILESIZE, TILESIZE});
     renderer->present();
@@ -139,5 +139,7 @@ int main(int argc, char *argv[]) {
   } catch (std::runtime_error e) {
     LOG_FATAL(LOG, "Something wrong happened! " << e.what());
     return 1;
+  } catch (...) {
+    LOG_FATAL(LOG, "Something wrong happened!");
   }
 }

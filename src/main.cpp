@@ -46,7 +46,7 @@ auto run() -> void {
   gfx::SpriteSheetImpl tile_sheet{*tiles, TILESIZE, TILESIZE};
   auto mapPath = "/tmp/testing_map";
   LOG_INFO(LOG, "Reading map from " << mapPath);
-  data::Map map = serialization::readFromFile<Map>(mapPath);
+  Map map = serialization::readFromFile<Map>(mapPath).orPanic();
 
   bool quit = false;
   sdl::EventQueue queue;

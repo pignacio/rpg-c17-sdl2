@@ -11,6 +11,7 @@
 #include <gsl/string_span>
 
 #include "logging.h"
+#include "serialization/result.h"
 #include "utils/strings.h"
 
 namespace serialization {
@@ -20,17 +21,24 @@ constexpr gsl::czstring<> JSON_SUFFIX = ".json";
 constexpr gsl::czstring<> BINARY_SUFFIX = ".bin";
 
 
-template <typename Data, typename Archive> auto read(std::istream &stream) -> Data {
-  auto data = Data::emptyValue();
-  Archive archive{stream};
-  archive(data);
-  return data;
+template <typename Data, typename Archive> auto read(std::istream &stream) -> Result<Data> {
+  try {
+    auto data = Data::emptyValue();
+    Archive archive{stream};
+    archive(data);
+    return Result{data};
+  } catch (std::runtime_error e) {
+    return Result<Data>::error(e.what());
+  }
 }
 
-template <typename Data, typename Archive> auto readFile(const std::string &path) -> Data {
+template <typename Data, typename Archive> auto readFile(const std::string &path) -> Result<Data> {
   LOG_INFO(LOG, "Reading " << boost::typeindex::type_id<Data>().pretty_name() << " from " << path
                            << " using " << boost::typeindex::type_id<Archive>().pretty_name());
   std::ifstream stream{path};
+  if (!stream.good()) {
+    return Result<Data>::error("Could not read from file '" + path + "'");
+  }
   return read<Data, Archive>(stream);
 }
 
@@ -51,7 +59,7 @@ auto writeToFile(const Data &data, const std::string &path, const std::string &s
 
 } // namespace internal
 
-template <typename Data> auto readFromFile(const std::string &path) -> Data {
+template <typename Data> auto readFromFile(const std::string &path) -> Result<Data> {
   if (utils::endsWith(path, internal::JSON_SUFFIX) && std::ifstream{path}.good()) {
     return internal::readFile<Data, cereal::JSONInputArchive>(path);
   } else if (utils::endsWith(path, internal::BINARY_SUFFIX) && std::ifstream{path}.good()) {
@@ -61,14 +69,14 @@ template <typename Data> auto readFromFile(const std::string &path) -> Data {
   } else if (auto binaryPath = path + internal::BINARY_SUFFIX; std::ifstream{binaryPath}.good()) {
     return internal::readFile<Data, cereal::PortableBinaryInputArchive>(binaryPath);
   }
-  throw "TODO: better error handling";
+  return Result<Data>::error("Could not read data. Tried in files: " + path + "{,.bin,.json}");
 }
 
-template <typename Data> auto readJson(std::istream& stream) -> Data {
+template <typename Data> auto readJson(std::istream& stream) -> Result<Data> {
   return internal::read<Data, cereal::JSONInputArchive>(stream); 
 }
 
-template <typename Data> auto readBinary(std::istream& stream) -> Data {
+template <typename Data> auto readBinary(std::istream& stream) -> Result<Data> {
   return internal::read<Data, cereal::PortableBinaryInputArchive>(stream); 
 }
 

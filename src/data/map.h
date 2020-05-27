@@ -9,7 +9,7 @@ namespace data {
 
 class Map {
 public:
-  Map(int widht, int height);
+  Map(int width, int height);
 
   auto set(int x, int y, int value) -> void;
 
