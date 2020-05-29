@@ -5,7 +5,6 @@
 #ifndef CLIONTEST_KEYBOARD_STATE_H
 #define CLIONTEST_KEYBOARD_STATE_H
 
-
 #include <SDL2/SDL.h>
 #include <gsl/span>
 

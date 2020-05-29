@@ -20,7 +20,6 @@ namespace internal {
 constexpr gsl::czstring<> JSON_SUFFIX = ".json";
 constexpr gsl::czstring<> BINARY_SUFFIX = ".bin";
 
-
 template <typename Data, typename Archive> auto read(std::istream &stream) -> Result<Data> {
   try {
     auto data = Data::emptyValue();
@@ -42,8 +41,7 @@ template <typename Data, typename Archive> auto readFile(const std::string &path
   return read<Data, Archive>(stream);
 }
 
-template <typename Data, typename Archive>
-auto write(const Data &data, std::ostream& stream) {
+template <typename Data, typename Archive> auto write(const Data &data, std::ostream &stream) {
   Archive archive{stream};
   archive(data);
 }
@@ -72,16 +70,17 @@ template <typename Data> auto readFromFile(const std::string &path) -> Result<Da
   return Result<Data>::error("Could not read data. Tried in files: " + path + "{,.bin,.json}");
 }
 
-template <typename Data> auto readJson(std::istream& stream) -> Result<Data> {
-  return internal::read<Data, cereal::JSONInputArchive>(stream); 
+template <typename Data> auto readJson(std::istream &stream) -> Result<Data> {
+  return internal::read<Data, cereal::JSONInputArchive>(stream);
 }
 
-template <typename Data> auto readBinary(std::istream& stream) -> Result<Data> {
-  return internal::read<Data, cereal::PortableBinaryInputArchive>(stream); 
+template <typename Data> auto readBinary(std::istream &stream) -> Result<Data> {
+  return internal::read<Data, cereal::PortableBinaryInputArchive>(stream);
 }
 
 template <typename Data> auto writeBinaryToFile(const Data &data, const std::string &path) -> void {
-  internal::writeToFile<Data, cereal::PortableBinaryOutputArchive>(data, path, internal::BINARY_SUFFIX);
+  internal::writeToFile<Data, cereal::PortableBinaryOutputArchive>(data, path,
+                                                                   internal::BINARY_SUFFIX);
 }
 
 template <typename Data> auto writeJsonToFile(const Data &data, const std::string &path) -> void {

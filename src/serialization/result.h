@@ -28,7 +28,7 @@ public:
   }
 
 private:
-  explicit Result(std::string_view message) : _result{}, _message(message) {};
+  explicit Result(std::string_view message) : _result{}, _message(message){};
 
   std::optional<Data> _result;
   std::string _message;
