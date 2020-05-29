@@ -5,8 +5,8 @@
 #ifndef CLIONTEST_ANIMATION_H
 #define CLIONTEST_ANIMATION_H
 
-#include "sdl/renderer.h"
-#include "direction.h"
+#include "sdl/renderer.hpp"
+#include "direction.hpp"
 
 namespace gfx {
 

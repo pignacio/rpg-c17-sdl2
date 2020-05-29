@@ -5,7 +5,7 @@
 #ifndef CLIONTEST_SPRITE_SHEET_H
 #define CLIONTEST_SPRITE_SHEET_H
 
-#include "../sdl/renderer.h"
+#include "../sdl/renderer.hpp"
 
 namespace sdl {
 class sdlTexture;

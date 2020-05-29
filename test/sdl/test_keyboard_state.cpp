@@ -2,8 +2,8 @@
 // Created by Ignacio Rossi on 4/7/18.
 //
 
-#include "prelude.h"
-#include "sdl/keyboard_state.h"
+#include "prelude.hpp"
+#include "sdl/keyboard_state.hpp"
 
 SDL_Scancode key(int index) {
   return static_cast<SDL_Scancode>(index);

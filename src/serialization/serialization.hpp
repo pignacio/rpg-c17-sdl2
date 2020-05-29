@@ -10,9 +10,9 @@
 #include <cereal/archives/portable_binary.hpp>
 #include <gsl/string_span>
 
-#include "logging.h"
-#include "serialization/result.h"
-#include "utils/strings.h"
+#include "logging.hpp"
+#include "serialization/result.hpp"
+#include "utils/strings.hpp"
 
 namespace serialization {
 namespace internal {

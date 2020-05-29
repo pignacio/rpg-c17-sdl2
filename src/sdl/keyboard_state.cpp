@@ -2,8 +2,8 @@
 // Created by Ignacio Rossi on 4/5/18.
 //
 
-#include "keyboard_state.h"
-#include "../logging.h"
+#include "keyboard_state.hpp"
+#include "../logging.hpp"
 
 KeyboardState::KeyboardState(gsl::span<const Uint8> state) : _state{state} {
 }

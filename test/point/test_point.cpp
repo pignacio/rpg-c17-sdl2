@@ -1,6 +1,6 @@
 
-#include "point/point.h"
-#include "prelude.h"
+#include "point/point.hpp"
+#include "prelude.hpp"
 
 using point::IPoint;
 

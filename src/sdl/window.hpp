@@ -6,7 +6,7 @@
 #define CLIONTEST_WINDOW_H
 
 #include "SDL2/SDL.h"
-#include "surface.h"
+#include "surface.hpp"
 
 namespace sdl {
 class Window {

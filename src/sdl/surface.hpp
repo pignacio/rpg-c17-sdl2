@@ -8,8 +8,8 @@
 #include <memory>
 
 #include "SDL2/SDL.h"
-#include "helpers.h"
-#include "ptr.h"
+#include "helpers.hpp"
+#include "ptr.hpp"
 
 namespace sdl {
 

@@ -2,7 +2,7 @@
 // Created by Ignacio Rossi on 4/4/18.
 //
 
-#include "event.h"
+#include "event.hpp"
 
 namespace sdl {
 

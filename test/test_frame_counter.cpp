@@ -5,9 +5,9 @@
  * Distributed under terms of the GPLv3 license.
  */
 
-#include "frame_counter.h"
-#include "mock_clock.h"
-#include "prelude.h"
+#include "frame_counter.hpp"
+#include "mock_clock.hpp"
+#include "prelude.hpp"
 
 using std::chrono::milliseconds;
 

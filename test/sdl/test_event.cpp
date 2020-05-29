@@ -2,8 +2,8 @@
 // Created by Ignacio Rossi on 4/7/18.
 //
 
-#include "prelude.h"
-#include "sdl/event.h"
+#include "prelude.hpp"
+#include "sdl/event.hpp"
 
 using sdl::Event;
 

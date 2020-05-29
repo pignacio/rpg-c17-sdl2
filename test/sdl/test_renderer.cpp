@@ -2,9 +2,9 @@
 // Created by Ignacio Rossi on 4/7/18.
 //
 
-#include "mock_texture.h"
-#include "prelude.h"
-#include "sdl/renderer.h"
+#include "mock_texture.hpp"
+#include "prelude.hpp"
+#include "sdl/renderer.hpp"
 
 using sdl::CopyDest;
 using sdl::CopySource;

@@ -9,8 +9,8 @@
 
 #include <SDL2/SDL.h>
 
-#include "event/mouse.h"
-#include "ptr.h"
+#include "event/mouse.hpp"
+#include "ptr.hpp"
 
 namespace sdl {
 

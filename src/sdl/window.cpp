@@ -2,8 +2,8 @@
 // Created by Ignacio Rossi on 4/1/18.
 //
 
-#include "window.h"
-#include "../logging.h"
+#include "window.hpp"
+#include "../logging.hpp"
 
 namespace sdl {
 

@@ -7,7 +7,7 @@
 
 #include <gmock/gmock.h>
 
-#include "sdl/texture.h"
+#include "sdl/texture.hpp"
 
 class MockTexture : public sdl::Texture {
 public:

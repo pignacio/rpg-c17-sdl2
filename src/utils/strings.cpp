@@ -1,4 +1,4 @@
-#include "utils/strings.h"
+#include "utils/strings.hpp"
 
 namespace utils {
 

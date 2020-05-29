@@ -1,5 +1,5 @@
 
-#include "direction.h"
+#include "direction.hpp"
 
 #include <cmath>
 

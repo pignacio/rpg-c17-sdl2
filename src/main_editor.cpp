@@ -12,15 +12,15 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
-#include "data/map.h"
-#include "event/mouse.h"
-#include "gfx/sprite_sheet.h"
-#include "logging.h"
-#include "sdl/event.h"
-#include "sdl/loader.h"
-#include "sdl/renderer.h"
-#include "sdl/window.h"
-#include "serialization/serialization.h"
+#include "data/map.hpp"
+#include "event/mouse.hpp"
+#include "gfx/sprite_sheet.hpp"
+#include "logging.hpp"
+#include "sdl/event.hpp"
+#include "sdl/loader.hpp"
+#include "sdl/renderer.hpp"
+#include "sdl/window.hpp"
+#include "serialization/serialization.hpp"
 
 using data::Map;
 

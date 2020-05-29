@@ -5,8 +5,8 @@
  * Distributed under terms of the GPLv3 license.
  */
 
-#include "mock_clock.h"
-#include "prelude.h"
+#include "mock_clock.hpp"
+#include "prelude.hpp"
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;

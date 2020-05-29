@@ -5,8 +5,8 @@
  * Distributed under terms of the GPLv3 license.
  */
 
-#include "logging.h"
-#include "prelude.h"
+#include "logging.hpp"
+#include "prelude.hpp"
 
 SCENARIO("dumpBacktrace works without an exception", "[logging]") {
   GIVEN("No current exception") {

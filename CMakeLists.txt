@@ -23,42 +23,42 @@ find_package(GMOCK REQUIRED gmock>=1.7.0)
 
 set(COMMON_SOURCES
     src/data/map.cpp
-    src/data/map.h
-    src/data/table.h
+    src/data/map.hpp
+    src/data/table.hpp
     src/direction.cpp
-    src/direction.h
-    src/enum_array.h
+    src/direction.hpp
+    src/enum_array.hpp
     src/event/mouse.cpp
-    src/event/mouse.h
+    src/event/mouse.hpp
     src/gfx/actor_animation.cpp
-    src/gfx/actor_animation.h
+    src/gfx/actor_animation.hpp
     src/gfx/sprite_sheet.cpp
-    src/gfx/sprite_sheet.h
+    src/gfx/sprite_sheet.hpp
     src/logging.cpp
-    src/logging.h
+    src/logging.hpp
     src/sdl/event.cpp
-    src/sdl/event.h
+    src/sdl/event.hpp
     src/sdl/helpers.cpp
-    src/sdl/helpers.h
+    src/sdl/helpers.hpp
     src/sdl/keyboard_state.cpp
-    src/sdl/keyboard_state.h
+    src/sdl/keyboard_state.hpp
     src/sdl/loader.cpp
-    src/sdl/loader.h
-    src/sdl/ptr.h
+    src/sdl/loader.hpp
+    src/sdl/ptr.hpp
     src/sdl/renderer.cpp
-    src/sdl/renderer.h
+    src/sdl/renderer.hpp
     src/sdl/surface.cpp
-    src/sdl/surface.h
+    src/sdl/surface.hpp
     src/sdl/texture.cpp
-    src/sdl/texture.h
+    src/sdl/texture.hpp
     src/sdl/window.cpp
-    src/sdl/window.h
-    src/serialization/serialization.h
-    src/serialization/result.h
+    src/sdl/window.hpp
+    src/serialization/serialization.hpp
+    src/serialization/result.hpp
     src/utils/assert.cpp
-    src/utils/assert.h
+    src/utils/assert.hpp
     src/utils/strings.cpp
-    src/utils/strings.h
+    src/utils/strings.hpp
 )
 
 add_library(common ${COMMON_SOURCES})
@@ -96,11 +96,11 @@ add_executable(
   ${MAIN_SOURCES}
   test/gfx/test_sprite_sheet.cpp
   test/mock_clock.cpp
-  test/mock_clock.h
+  test/mock_clock.hpp
   test/point/test_point.cpp
-  test/prelude.h
+  test/prelude.hpp
   test/sdl/mock_texture.cpp
-  test/sdl/mock_texture.h
+  test/sdl/mock_texture.hpp
   test/sdl/test_event.cpp
   test/sdl/test_keyboard_state.cpp
   test/sdl/test_renderer.cpp

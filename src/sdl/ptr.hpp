@@ -5,7 +5,7 @@
 #ifndef CLIONTEST_PTR_H
 #define CLIONTEST_PTR_H
 
-#include "../logging.h"
+#include "../logging.hpp"
 
 #include <functional>
 #include <gsl/pointers>

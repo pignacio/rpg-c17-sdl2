@@ -2,7 +2,7 @@
 // Created by Ignacio Rossi on 4/2/18.
 //
 
-#include "logging.h"
+#include "logging.hpp"
 #include <execinfo.h>
 #include <unistd.h>
 

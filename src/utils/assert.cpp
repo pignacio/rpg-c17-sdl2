@@ -1,6 +1,6 @@
-#include "utils/assert.h"
+#include "utils/assert.hpp"
 
-#include "logging.h"
+#include "logging.hpp"
 namespace utils {
 
 auto checkIndex(int index, int size, const char *name) -> void {

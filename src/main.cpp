@@ -9,14 +9,14 @@
 #include <cereal/archives/json.hpp>
 #include <cereal/cereal.hpp>
 
-#include "data/map.h"
-#include "gfx/sprite_sheet.h"
-#include "logging.h"
-#include "sdl/event.h"
-#include "sdl/loader.h"
-#include "sdl/renderer.h"
-#include "sdl/window.h"
-#include "serialization/serialization.h"
+#include "data/map.hpp"
+#include "gfx/sprite_sheet.hpp"
+#include "logging.hpp"
+#include "sdl/event.hpp"
+#include "sdl/loader.hpp"
+#include "sdl/renderer.hpp"
+#include "sdl/window.hpp"
+#include "serialization/serialization.hpp"
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;

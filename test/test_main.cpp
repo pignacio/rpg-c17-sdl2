@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 
-#include "logging.h"
-#include "prelude.h"
+#include "logging.hpp"
+#include "prelude.hpp"
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;

@@ -2,7 +2,7 @@
 // Created by Ignacio Rossi on 4/7/18.
 //
 
-#include "sprite_sheet.h"
+#include "sprite_sheet.hpp"
 
 namespace gfx {
 

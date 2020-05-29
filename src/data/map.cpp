@@ -1,8 +1,8 @@
-#include "data/map.h"
+#include "data/map.hpp"
 
 #include <utility>
 
-#include "logging.h"
+#include "logging.hpp"
 
 namespace data {
 

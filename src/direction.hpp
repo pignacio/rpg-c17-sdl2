@@ -1,9 +1,9 @@
 #ifndef CLIONTEST_DIRECTION_H
 #define CLIONTEST_DIRECTION_H
 
-#include "point/point.h"
+#include "point/point.hpp"
 
-#include "logging.h"
+#include "logging.hpp"
 #include <array>
 #include <cmath>
 

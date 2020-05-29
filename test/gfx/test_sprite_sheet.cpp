@@ -2,9 +2,9 @@
 // Created by Ignacio Rossi on 4/7/18.
 //
 
-#include "gfx/sprite_sheet.h"
-#include "prelude.h"
-#include "sdl/mock_texture.h"
+#include "gfx/sprite_sheet.hpp"
+#include "prelude.hpp"
+#include "sdl/mock_texture.hpp"
 
 using ::gfx::SpriteSheetImpl;
 using ::sdl::CopySource;

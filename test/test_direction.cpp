@@ -8,8 +8,8 @@
 #include <array>
 #include <cmath>
 
-#include "direction.h"
-#include "prelude.h"
+#include "direction.hpp"
+#include "prelude.hpp"
 
 using point::DPoint;
 

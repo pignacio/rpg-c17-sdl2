@@ -2,8 +2,8 @@
 // Created by Ignacio Rossi on 4/1/18.
 //
 
-#include "surface.h"
-#include "../logging.h"
+#include "surface.hpp"
+#include "../logging.hpp"
 #include <SDL2/SDL_image.h>
 #include <cassert>
 

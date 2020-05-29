@@ -5,7 +5,7 @@
  * Distributed under terms of the GPLv3 license.
  */
 
-#include "event/mouse.h"
+#include "event/mouse.hpp"
 
 namespace event {
 

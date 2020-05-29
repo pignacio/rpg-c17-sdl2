@@ -11,9 +11,9 @@
 
 #include <SDL2/SDL_render.h>
 
-#include "surface.h"
-#include "texture.h"
-#include "window.h"
+#include "surface.hpp"
+#include "texture.hpp"
+#include "window.hpp"
 
 namespace sdl {
 

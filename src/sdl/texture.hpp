@@ -5,7 +5,7 @@
 #ifndef CLIONTEST_TEXTURE_H
 #define CLIONTEST_TEXTURE_H
 
-#include "ptr.h"
+#include "ptr.hpp"
 #include <SDL2/SDL.h>
 
 namespace sdl {

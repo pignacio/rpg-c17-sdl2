@@ -5,7 +5,7 @@
  * Distributed under terms of the GPLv3 license.
  */
 
-#include "mock_clock.h"
+#include "mock_clock.hpp"
 
 #include <chrono>
 

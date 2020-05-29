@@ -1,7 +1,7 @@
-#include "actor_animation.h"
+#include "actor_animation.hpp"
 
-#include "gfx/sprite_sheet.h"
-#include "logging.h"
+#include "gfx/sprite_sheet.hpp"
+#include "logging.hpp"
 
 namespace gfx {
 

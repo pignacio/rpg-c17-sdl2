@@ -2,10 +2,10 @@
 // Created by Ignacio Rossi on 4/1/18.
 //
 
-#include "renderer.h"
+#include "renderer.hpp"
 
-#include "../logging.h"
-#include "surface.h"
+#include "../logging.hpp"
+#include "surface.hpp"
 #include <memory>
 
 namespace sdl {

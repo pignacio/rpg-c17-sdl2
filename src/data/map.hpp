@@ -3,7 +3,7 @@
 
 #include <cereal/cereal.hpp>
 
-#include "data/table.h"
+#include "data/table.hpp"
 
 namespace data {
 

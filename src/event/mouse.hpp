@@ -12,8 +12,8 @@
 #include <optional>
 #include <vector>
 
-#include "enum_array.h"
-#include "point/point.h"
+#include "enum_array.hpp"
+#include "point/point.hpp"
 
 namespace event {
 

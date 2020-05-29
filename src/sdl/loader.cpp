@@ -2,12 +2,12 @@
 // Created by Ignacio Rossi on 4/3/18.
 //
 
-#include "loader.h"
+#include "loader.hpp"
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "../logging.h"
+#include "../logging.hpp"
 
 namespace sdl {
 

@@ -2,8 +2,8 @@
 // Created by Ignacio Rossi on 4/3/18.
 //
 
-#include "texture.h"
-#include "../logging.h"
+#include "texture.hpp"
+#include "../logging.hpp"
 
 namespace sdl {
 
