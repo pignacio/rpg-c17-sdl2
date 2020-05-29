@@ -25,9 +25,13 @@ set(COMMON_SOURCES
     src/data/map.cpp
     src/data/map.h
     src/data/table.h
+    src/direction.cpp
+    src/direction.h
     src/enum_array.h
     src/event/mouse.cpp
     src/event/mouse.h
+    src/gfx/actor_animation.cpp
+    src/gfx/actor_animation.h
     src/gfx/sprite_sheet.cpp
     src/gfx/sprite_sheet.h
     src/logging.cpp
