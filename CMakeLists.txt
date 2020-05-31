@@ -87,10 +87,8 @@ include_directories(
   ${SDL_INCLUDE_DIR}
   ${SDL2_IMAGE_INCLUDE_DIR}
   ${SDL2_TTF_INCLUDE_DIR}
-  ${CONAN_INCLUDE_DIRS}
-  /usr/local/include
 )
-include_directories(SYSTEM thirdparty)
+include_directories(SYSTEM /usr/local/include thirdparty ${CONAN_INCLUDE_DIRS})
 
 MESSAGE(STATUS "Conan include: ${CONAN_INCLUDE_DIRS}, libs: ${CONAN_LIBS}")
 
