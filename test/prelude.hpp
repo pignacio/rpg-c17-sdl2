@@ -5,7 +5,7 @@
 #ifndef CLIONTEST_MY_CATCH_H
 #define CLIONTEST_MY_CATCH_H
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include "gmock/gmock.h"
 
 #ifdef CATCH_CONFIG_PREFIX_ALL

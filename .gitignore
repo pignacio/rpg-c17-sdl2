@@ -34,3 +34,10 @@ build.ninja
 rules.ninja
 .ninja_deps
 .ninja_log
+
+# Conan files
+conan.lock
+conanbuildinfo.cmake
+conanbuildinfo.txt
+conaninfo.txt
+graph_info.json

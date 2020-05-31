@@ -14,6 +14,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_definitions(-DCATCH_CONFIG_PREFIX_ALL)
 
+MESSAGE(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
@@ -69,13 +74,13 @@ set(EDITOR_SOURCES)
 add_executable(main ${MAIN_SOURCES})
 target_sources(main PUBLIC src/main.cpp)
 target_link_libraries(
-  main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} common
+  main ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${CONAN_LIBS} common
 )
 
 add_executable(editor ${EDITOR_SOURCES})
 target_sources(editor PUBLIC src/main_editor.cpp)
 target_link_libraries(
-  editor ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} common
+  editor ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${CONAN_LIBS} common
 )
 
 include_directories(
@@ -86,9 +91,11 @@ include_directories(
   ${SDL2_TTF_INCLUDE_DIR}
   ${GTEST_INCLUDE_DIRS}
   ${GMOCK_INCLUDE_DIRS}
+  ${CONAN_INCLUDE_DIRS}
 )
 include_directories(SYSTEM thirdparty)
 
+MESSAGE(STATUS "Conan include: ${CONAN_INCLUDE_DIRS}, libs: ${CONAN_LIBS}")
 
 add_executable(
   tests

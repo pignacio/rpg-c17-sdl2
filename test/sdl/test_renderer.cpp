@@ -12,12 +12,10 @@ using sdl::TextureImpl;
 using ::testing::Return;
 
 SCENARIO("Textures works as CopySources", "[sdl][CopySource]") {
-  auto ptr = reinterpret_cast<SDL_Texture *>(0x123456);  // NOLINT
   ::testing::StrictMock<MockTexture> texture;
   EXPECT_CALL(texture, width()).WillRepeatedly(Return(10));
   EXPECT_CALL(texture, height()).WillRepeatedly(Return(20));
 
-  //  TextureImpl texture{ptr, 10, 20};
   GIVEN("A CopySource constructed from a Texture") {
     CopySource source{texture};
     THEN("it points to the right texture.") {
