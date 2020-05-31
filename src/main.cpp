@@ -73,7 +73,11 @@ auto main() -> int {
   std::set_terminate(logging::terminate);
 
   LOG_INFO(LOG, "Hai!");
-  run();
+  try {
+    run();
+  } catch (std::runtime_error e) {
+    LOG_FATAL(LOG, "run() failed :(. " << e.what());
+  }
   LOG_INFO(LOG, "Kthxbye!");
   return 0;
 }

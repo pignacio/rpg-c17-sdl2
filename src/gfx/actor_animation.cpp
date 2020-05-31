@@ -15,13 +15,14 @@ DirectionMap<int> defaultIndexes() {
   indexes[Direction::DOWN_LEFT] = 2;
   indexes[Direction::RIGHT] = 3;
   indexes[Direction::RIGHT_DOWN] = 3;
-    // Fallback to right
+  // Fallback to right
   indexes[Direction::NONE] = 3;
   return indexes;
 }
 
 ActorAnimationImpl::ActorAnimationImpl(SpriteSheet &sheet, int duration)
-    : ActorAnimationImpl{sheet, defaultIndexes(), duration} {}
+    : ActorAnimationImpl{sheet, defaultIndexes(), duration} {
+}
 
 ActorAnimationImpl::ActorAnimationImpl(SpriteSheet &sheet, DirectionMap<int> indexes, int duration)
     : _sheet{sheet}, _indexes{indexes}, _duration{duration} {
@@ -29,7 +30,7 @@ ActorAnimationImpl::ActorAnimationImpl(SpriteSheet &sheet, DirectionMap<int> ind
   LOG_ASSERT(LOG, _sheet.height() >= 4, "Sprite sheet must be at least 4 tall");
 }
 
-sdl::CopySource ActorAnimationImpl::getFrame(int ticks, const Direction& direction) {
+sdl::CopySource ActorAnimationImpl::getFrame(int ticks, const Direction &direction) {
   int index = (ticks / _duration) % _sheet.width();
   return {_sheet.get(index, _indexes[direction])};
 }

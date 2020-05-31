@@ -5,8 +5,8 @@
 #ifndef CLIONTEST_ANIMATION_H
 #define CLIONTEST_ANIMATION_H
 
-#include "sdl/renderer.hpp"
 #include "direction.hpp"
+#include "sdl/renderer.hpp"
 
 namespace gfx {
 
@@ -16,7 +16,7 @@ class ActorAnimation {
 public:
   virtual ~ActorAnimation() = default;
 
-  virtual sdl::CopySource getFrame(int ticks, const Direction& direction) = 0;
+  virtual sdl::CopySource getFrame(int ticks, const Direction &direction) = 0;
 };
 
 class ActorAnimationImpl : public ActorAnimation {
@@ -24,7 +24,7 @@ public:
   ActorAnimationImpl(SpriteSheet &_sheet, int duration);
   ActorAnimationImpl(SpriteSheet &_sheet, DirectionMap<int> indexes, int duration);
 
-  sdl::CopySource getFrame(int ticks, const Direction& direction);
+  sdl::CopySource getFrame(int ticks, const Direction &direction);
 
 private:
   gfx::SpriteSheet &_sheet;

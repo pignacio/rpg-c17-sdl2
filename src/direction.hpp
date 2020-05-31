@@ -50,14 +50,13 @@ template <typename T> Direction Direction::getDirection(point::Point<T> directio
 
 std::ostream &operator<<(std::ostream &stream, const Direction &direction);
 
-template<typename T>
-class DirectionMap {
+template <typename T> class DirectionMap {
 public:
-  const T& operator[](Direction d) const {
+  const T &operator[](Direction d) const {
     return _array[index(d)];
   }
 
-  T& operator[](Direction d){
+  T &operator[](Direction d) {
     return _array[index(d)];
   }
 
@@ -66,7 +65,7 @@ private:
 
   unsigned long index(Direction d) {
     auto vector = d.getUnitVector();
-    return  static_cast<unsigned long>(sign(vector.x) + 1 + 3 * (sign(vector.y) + 1));
+    return static_cast<unsigned long>(sign(vector.x) + 1 + 3 * (sign(vector.y) + 1));
   }
 };
 
