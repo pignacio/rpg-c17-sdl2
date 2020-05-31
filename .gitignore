@@ -28,6 +28,9 @@ cliontest.cbp
 .coverage
 /build/
 
+# vim config
+.lvimrc
+
 # Ninja build
 build.ninja
 rules.ninja

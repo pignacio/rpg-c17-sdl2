@@ -23,9 +23,6 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
-find_package(GTEST REQUIRED gtest>=-1.7.0)
-find_package(GMOCK REQUIRED gmock>=1.7.0)
-
 set(COMMON_SOURCES
     src/data/map.cpp
     src/data/map.hpp
@@ -90,9 +87,8 @@ include_directories(
   ${SDL_INCLUDE_DIR}
   ${SDL2_IMAGE_INCLUDE_DIR}
   ${SDL2_TTF_INCLUDE_DIR}
-  ${GTEST_INCLUDE_DIRS}
-  ${GMOCK_INCLUDE_DIRS}
   ${CONAN_INCLUDE_DIRS}
+  /usr/local/include
 )
 include_directories(SYSTEM thirdparty)
 
@@ -117,8 +113,8 @@ add_executable(
   test/test_main.cpp)
 
 target_link_libraries(
-  tests ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES}
-  ${GTEST_LIBRARIES} ${GMOCK_LIBRARIES})
+  tests ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${CONAN_LIBS}
+)
 
 target_compile_options(tests PUBLIC -O0 -fprofile-arcs -ftest-coverage
                                     -DDISABLE_BACKTRACES)

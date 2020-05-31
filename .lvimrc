@@ -1,5 +1,0 @@
-let g:conan_flags = "-isystem/Users/irossi/.conan/data/catch2/2.12.2/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include -DTEST1"
-
-let g:ale_cpp_clang_options = '-Wall -Wextra -Wpedantic -Wconversion -Wshadow -std=c++17 -isystem /usr/include/c++/v1 -I src -I test -isystem thirdparty -DCATCH_CONFIG_PREFIX_ALL ' . g:conan_flags
-let g:ale_cpp_gcc_options = '-Wall -Wextra -Wpedantic -Wconversion -Wshadow -std=c++17 -isystem /usr/include/c++/v1 -I src -I test -isystem thirdparty -DCATCH_CONFIG_PREFIX_ALL ' . g:conan_flags
-
