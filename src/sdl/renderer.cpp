@@ -78,6 +78,9 @@ int CopySource::height() const {
 CopyDest::CopyDest(const SDL_Rect &rect) : _hasDimentions{true}, _rect{rect} {
 }
 
+CopyDest::CopyDest(point::IPoint point) : CopyDest{point.x, point.y} {
+}
+
 CopyDest::CopyDest(int x, int y) : _hasDimentions{false}, _rect{x, y, 0, 0} {
 }
 

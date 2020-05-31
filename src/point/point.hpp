@@ -46,6 +46,10 @@ public:
     return !(*this == other);
   }
 
+  template <typename U> Point<U> cast() const {
+    return {static_cast<U>(x), static_cast<U>(y)};
+  }
+
   T x;
   T y;
 };

@@ -11,9 +11,10 @@
 
 #include <SDL2/SDL_render.h>
 
-#include "surface.hpp"
-#include "texture.hpp"
-#include "window.hpp"
+#include "point/point.hpp"
+#include "sdl/surface.hpp"
+#include "sdl/texture.hpp"
+#include "sdl/window.hpp"
 
 namespace sdl {
 
@@ -61,6 +62,7 @@ private:
 class CopyDest {
 public:
   CopyDest(const SDL_Rect &rect);
+  CopyDest(point::IPoint y);
   CopyDest(int x, int y);
   CopyDest(int x, int y, int w, int h);
 

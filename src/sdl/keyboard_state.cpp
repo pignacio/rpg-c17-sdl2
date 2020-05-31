@@ -5,6 +5,8 @@
 #include "keyboard_state.hpp"
 #include "../logging.hpp"
 
+namespace sdl {
+
 KeyboardState::KeyboardState(gsl::span<const Uint8> state) : _state{state} {
 }
 
@@ -21,3 +23,9 @@ KeyboardState KeyboardState::create() {
   const Uint8 *state = SDL_GetKeyboardState(&size);
   return KeyboardState({state, static_cast<size_t>(size)});
 }
+
+KeyboardState KeyboardState::createForTesting(gsl::span<const Uint8> state) {
+  return KeyboardState{state};
+}
+
+} // namespace sdl

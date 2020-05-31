@@ -5,18 +5,17 @@
 #include "prelude.hpp"
 #include "sdl/keyboard_state.hpp"
 
+using sdl::KeyboardState;
+
 SDL_Scancode key(int index) {
   return static_cast<SDL_Scancode>(index);
 }
 
-KeyboardState createStateForTesting(gsl::span<const Uint8> state) {
-  return KeyboardState{state};
-}
 
 SCENARIO("Using a KeyboardState", "[sdl][KeyboardState]") {
   constexpr int size = 5;
   std::array<Uint8, size> values{};
-  auto state = createStateForTesting(values);
+  auto state = KeyboardState::createForTesting(values);
 
   GIVEN("An empty state") {
     THEN("All keys resolve to false") {

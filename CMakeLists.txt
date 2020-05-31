@@ -35,6 +35,7 @@ set(COMMON_SOURCES
     src/enum_array.hpp
     src/event/mouse.cpp
     src/event/mouse.hpp
+    src/frame_counter.hpp
     src/gfx/actor_animation.cpp
     src/gfx/actor_animation.hpp
     src/gfx/sprite_sheet.cpp
